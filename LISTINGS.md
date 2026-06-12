@@ -67,8 +67,14 @@ index from GitHub; all of them link to it as the canonical home.
   (requires Smithery's own OAuth in front of the config params). Snapshot URLs + registry
   ingestion is the real sync strategy.
 - **Verify:** after review approval, glama.ai/mcp/servers search for "agent signals".
-- Status: in progress 2026-06-12 — connector form filled, awaiting test-token paste +
-  submit-for-review
+- **SECURITY FOLLOW-UP:** the "Agents" Apify token was exposed in a session transcript
+  during submission (screenshot captured the pasted value 2026-06-12). ROTATE it at
+  console.apify.com/settings/integrations as soon as the Glama review concludes (rotating
+  earlier would break the reviewer's test credential). If review takes >7 days, rotate
+  anyway and resubmit.
+- Status: SUBMITTED 2026-06-12 (Hassan pasted test token + submitted) — pending Glama
+  human review; duplicate-name guard confirmed it is in the queue. Verify-in-search after
+  approval.
 
 ## 4. mcp.so
 - **How:** "Submit" form (name, GitHub URL, description). No account barrier last checked.
