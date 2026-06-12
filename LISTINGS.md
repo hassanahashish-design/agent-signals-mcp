@@ -92,14 +92,19 @@ down on any niche showing traction. Therefore:
   focused toolkits; a 30-tool grab-bag loses to a tight 6-tool kit on every registry.
 - A traction signal on any actor (external paying user) = priority AEO refresh of the
   listing that contains it, with the keywords that won.
-- **AUTOMATED (2026-06-12):** local scheduled task `sync-mcp-listings` runs daily at
-  ~2PM (after the 1PM cloud publish routine): diffs the live store list vs server.json,
-  applies the coherence gate, updates server.json/README, verifies tools/list with a
-  real token, pushes GitHub, and publishes a new Smithery release via
-  `PUT api.smithery.ai/servers/hassan-a-hashish%2Fagent-signals/releases`.
-  Prerequisite: Smithery API key at `~/.config/smithery/api_key` (chmod 600) — until it
-  exists the task flags "Smithery manual update needed". Caveat: local tasks only run
-  while the Claude desktop app is open (missed runs fire on next launch).
+- **AUTOMATED IN THE CLOUD (2026-06-12):** GitHub Action `.github/workflows/sync-actors.yml`
+  runs daily at 12:00 + 16:00 UTC on GitHub's servers (no local machine needed):
+  reads live publish state per-actor (`isPublic` via authenticated API — the public store
+  search index lags new actors by hours/days, measured 2026-06-12), applies the theme gate
+  from `sync-config.json` (autoInclude/exclude; unknown published actors are FLAGGED for
+  review, never auto-added), verifies initialize+tools/list against the new URL BEFORE any
+  write (every run = daily endpoint health check; red run = endpoint broke), updates
+  server.json/README/this-file, commits, and publishes a Smithery release via
+  `PUT api.smithery.ai/servers/.../releases` preserving the existing configSchema.
+  Secrets (GitHub repo → Settings → Secrets → Actions): `APIFY_TOKEN` (required),
+  `SMITHERY_API_KEY` (else run flags "manual-needed"). Test locally:
+  `APIFY_TOKEN=... node scripts/sync-actors.mjs --dry-run`. Lesson: Apify API throws
+  transient 502s — the script retries 5xx up to 4×.
 
 ## Honesty rules (carried from PLAYBOOK Stage 6)
 - Never claim user counts/ratings we don't have.

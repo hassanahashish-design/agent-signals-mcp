@@ -1,0 +1,49 @@
+name: Sync actors list
+# Keeps the MCP toolkit (server.json/README) + Smithery release in sync with the
+# live Apify portfolio. Runs in the cloud — no local machine needed.
+# Secrets required: APIFY_TOKEN (verify + portfolio read), SMITHERY_API_KEY (release).
+
+on:
+  schedule:
+    - cron: '0 12 * * *'   # daily, ~2h after the 1PM publish routine in any of its plausible timezones
+    - cron: '0 16 * * *'   # idempotent safety net for late publishes
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-actors
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sync + verify
+        id: sync
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          SMITHERY_API_KEY: ${{ secrets.SMITHERY_API_KEY }}
+        run: node scripts/sync-actors.mjs
+
+      - name: Commit & push
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "actor-sync"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add server.json README.md LISTINGS.md
+          git commit -m "sync actors list: ${{ steps.sync.outputs.summary_line }}"
+          git push
+
+      - name: Surface Smithery failure
+        if: steps.sync.outputs.smithery == 'failed' || steps.sync.outputs.smithery == 'manual-needed'
+        run: |
+          echo "::warning::Smithery release not updated (${{ steps.sync.outputs.smithery }}) — see step summary"
+          test "${{ steps.sync.outputs.smithery }}" = "manual-needed" || exit 1

@@ -1,0 +1,20 @@
+{
+  "username": "oblanceolate_mandola",
+  "smitheryServer": "hassan-a-hashish/agent-signals",
+  "comment": "Theme gate for the agent-signals toolkit (signals & intelligence — see LISTINGS.md). Published actors in autoInclude are added to the MCP URL automatically. Published actors in neither list are FLAGGED for human/Claude review, never auto-added. exclude = never list here.",
+  "autoInclude": [
+    "company-hiring-signals",
+    "sec-edgar-filings",
+    "research-paper-search",
+    "github-repo-search",
+    "hacker-news-monitor",
+    "federal-register-monitor",
+    "clinical-trials-search",
+    "court-opinions-search",
+    "gdelt-news-monitor",
+    "stackoverflow-search"
+  ],
+  "exclude": [
+    "uae-business-verify"
+  ]
+}
