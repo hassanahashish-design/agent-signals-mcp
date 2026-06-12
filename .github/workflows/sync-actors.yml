@@ -29,8 +29,8 @@ jobs:
       - name: Sync + verify
         id: sync
         env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-          SMITHERY_API_KEY: ${{ secrets.SMITHERY_API_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN2 }}
+          SMITHERY_API_KEY: ${{ secrets.SMITHERY }}
         run: node scripts/sync-actors.mjs
 
       - name: Commit & push
