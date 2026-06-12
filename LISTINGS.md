@@ -54,6 +54,21 @@ index from GitHub; all of them link to it as the canonical home.
 - **MCPize / MCP Hive:** marketplace-billed MCP hosting (85% / unknown share). Needs Hassan
   accounts; traffic unproven — list the same toolkit, measure, don't invest beyond listing.
 
+## Standing maintenance — the portfolio grows daily (added 2026-06-12)
+
+The factory's daily routine publishes up to 5 new actors/day in diverse verticals
+(see actor-factory/PLAYBOOK.md "Portfolio strategy" + DISCOVERY-POOL.md), and doubles
+down on any niche showing traction. Therefore:
+- **After any publish day**, sync the `actors=` list: update server.json + README here,
+  re-push the GitHub repo, and update any registry listing that snapshots the tool list.
+- **Keep the toolkit coherent.** This listing is "signals & intelligence" (hiring, SEC,
+  research, GitHub, HN — and natural additions like federal-register, clinical-trials,
+  court-opinions when they publish). If the portfolio diversifies into unrelated verticals
+  (earthquakes, food safety, museums...), START A SECOND themed MCP listing — agents pick
+  focused toolkits; a 30-tool grab-bag loses to a tight 6-tool kit on every registry.
+- A traction signal on any actor (external paying user) = priority AEO refresh of the
+  listing that contains it, with the keywords that won.
+
 ## Honesty rules (carried from PLAYBOOK Stage 6)
 - Never claim user counts/ratings we don't have.
 - Every capability claim must be field-verified against the actor's spec.json.
