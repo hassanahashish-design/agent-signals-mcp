@@ -11,13 +11,35 @@ index from GitHub; all of them link to it as the canonical home.
 
 ---
 
-## 1. Official MCP Registry (registry.modelcontextprotocol.io) — DO FIRST
-- **Why first:** PulseMCP, Glama and others ingest from it — one submission seeds several
-  directories.
-- **How:** `npx @modelcontextprotocol/publisher publish` from the repo (GitHub-auth flow,
-  needs Hassan logged into GitHub). Uses server.json as-is.
-- **Verify:** `curl https://registry.modelcontextprotocol.io/v0/servers?search=agent-signals`
-- Status: draft
+## 1. Official MCP Registry (registry.modelcontextprotocol.io)
+- **Why high-leverage:** PulseMCP, Glama and others ingest from it — one publish seeds
+  several directories.
+- **TOOLING (verified live 2026-06-12 — the old runbook command was WRONG):**
+  - `npx @modelcontextprotocol/publisher` = 404 (does not exist).
+  - npm `mcp-publisher` = a DIFFERENT tool — launches as an stdio MCP server, NOT the
+    registry CLI. Do not use.
+  - The real CLI is the Go binary `mcp-publisher` from the registry's GitHub releases:
+    `github.com/modelcontextprotocol/registry/releases/latest` →
+    `mcp-publisher_<os>_<arch>.tar.gz` (darwin_arm64 for this Mac). Subcommands:
+    init / login / logout / publish / status / validate.
+- **FLOW (walked 2026-06-12):**
+  1. `./mcp-publisher validate` (no auth) — catches schema errors first. It flagged
+     two: description must be <=100 chars (ours was 159 → shortened), and the
+     2025-07-09 schema is deprecated → migrated to 2025-12-11 (snake_case→camelCase:
+     `is_required`→`isRequired`, `is_secret`→`isSecret`; `$schema` bumped; `headers`
+     field name unchanged). Re-validate until "✅ server.json is valid".
+  2. `./mcp-publisher login github` — interactive device-code flow; Hassan opens
+     github.com/login/device, enters the code, authorizes (OAuth grant = his click).
+     Must be logged into GitHub as `hassanahashish-design` (owns the namespace).
+  3. `./mcp-publisher publish` — reads local server.json.
+- **VERIFIED LIVE 2026-06-12:** published `io.github.hassanahashish-design/agent-signals-mcp`
+  v1.0.0; `curl "https://registry.modelcontextprotocol.io/v0/servers?search=agent-signals"`
+  returns 1 result, status **active**, correct remote URL.
+- **AUTOMATED:** the sync Action now republishes on every toolkit change via
+  `mcp-publisher login github-oidc` (no secret — repo owner authorizes the namespace).
+  The script's version-bump-on-change avoids duplicate-version rejection. (OIDC path
+  unverified until the first toolkit-change run exercises it; step is non-fatal.)
+- Status: **LIVE / verified-in-search 2026-06-12.**
 
 ## 2. Smithery (smithery.ai)
 - **How (actual flow, walked 2026-06-12):** smithery.ai/new → namespace `hassan-a-hashish` +
@@ -97,10 +119,13 @@ index from GitHub; all of them link to it as the canonical home.
   "update project success" confirmed) — pending mcp.so review.
 
 ## 5. PulseMCP (pulsemcp.com)
-- **How:** ingests the official registry (step 1 covers it); manual submission form exists
-  as a fallback.
-- **Verify:** search after step 1 propagates.
-- Status: draft
+- **How (confirmed 2026-06-12):** NO manual server form — pulsemcp.com/submit → "MCP Server"
+  literally says "We ingest entries from the Official MCP Registry daily and process them
+  weekly." So channel 1 (registry, now LIVE) fully covers PulseMCP. Email hello@pulsemcp.com
+  only for listing tweaks.
+- **Verify:** search pulsemcp.com for "agent signals" ~a week after the registry publish
+  (2026-06-12) — i.e. on/after ~2026-06-19.
+- Status: COVERED via official registry (auto) — awaiting their weekly ingest.
 
 ---
 

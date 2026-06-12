@@ -1,7 +1,11 @@
 name: Sync actors list
-# Keeps the MCP toolkit (server.json/README) + Smithery release in sync with the
-# live Apify portfolio. Runs in the cloud — no local machine needed.
-# Secrets required: APIFY_TOKEN (verify + portfolio read), SMITHERY_API_KEY (release).
+# Keeps the MCP toolkit (server.json/README) + Smithery release + official MCP
+# registry in sync with the live Apify portfolio. Runs in the cloud — no local
+# machine needed.
+# Secrets: APIFY_TOKEN2 (Apify token, verify + portfolio read), SMITHERY (Smithery
+# API key, release). The official-registry republish uses GitHub-Actions OIDC — no
+# secret needed; the repo owner (hassanahashish-design) authorizes the matching
+# io.github.hassanahashish-design/* namespace.
 
 on:
   schedule:
@@ -11,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write   # for OIDC auth to the official MCP registry
 
 concurrency:
   group: sync-actors
@@ -41,6 +46,21 @@ jobs:
           git add server.json README.md LISTINGS.md
           git commit -m "sync actors list: ${{ steps.sync.outputs.summary_line }}"
           git push
+
+      - name: Republish to official MCP registry
+        # Runs after commit so the published server.json matches the repo. The sync
+        # script bumps server.json version on every change, so the registry never
+        # sees a duplicate-version rejection. Non-fatal: a failure warns, not blocks.
+        if: steps.sync.outputs.changed == 'true'
+        continue-on-error: true
+        run: |
+          url=$(curl -s https://api.github.com/repos/modelcontextprotocol/registry/releases/latest \
+            | jq -r '.assets[] | select(.name=="mcp-publisher_linux_amd64.tar.gz") | .browser_download_url')
+          curl -sL "$url" -o mcp-publisher.tar.gz
+          tar xzf mcp-publisher.tar.gz
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish
+          echo "Republished server.json to the official MCP registry (seeds PulseMCP + Glama)."
 
       - name: Surface Smithery failure
         if: steps.sync.outputs.smithery == 'failed' || steps.sync.outputs.smithery == 'manual-needed'
