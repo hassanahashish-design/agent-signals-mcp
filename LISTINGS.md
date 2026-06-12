@@ -49,10 +49,26 @@ index from GitHub; all of them link to it as the canonical home.
   cosmetic, not controllable from Smithery.
 
 ## 3. Glama (glama.ai/mcp/servers)
-- **How:** indexes public GitHub MCP repos automatically once server.json + README exist;
-  there is also a manual "submit" form — use it to accelerate.
-- **Verify:** glama.ai/mcp/servers search for "agent signals".
-- Status: draft
+- **How (actual flow, walked 2026-06-12):** requires a Glama account (Hassan signed in
+  via GitHub OAuth). "Add Server" modal → **Connector tab** (we are a deployed remote
+  endpoint; the "Server" tab is for source-code repos). Fields: name, 1-2 sentence
+  description, Server URL (the raw mcp.apify.com URL), and PRIVATE NOTES with a working
+  test token — Glama human-reviews and only indexes connectors whose endpoint responds
+  healthy, and ours 401s without a token. Used the dedicated "Agents" Apify token
+  (rotatable independently of the default token that powers the sync Action).
+- **Sync model:** the connector URL is a SNAPSHOT — old URL keeps serving its 5 actors
+  but won't show new ones. The sync Action flags "manual Glama URL update" in its run
+  summary whenever the toolkit changes. Long-term: Glama auto-ingests the official MCP
+  registry (io.github.* connector entries), so channel 1 (registry, reads server.json)
+  will give Glama a self-updating entry — the manual connector is for immediate
+  visibility.
+- **LESSON (verified 2026-06-12):** the Smithery gateway URL (run.tools) CANNOT be
+  cross-listed as a universal stable URL — it returns 401 "Missing Authorization header"
+  (requires Smithery's own OAuth in front of the config params). Snapshot URLs + registry
+  ingestion is the real sync strategy.
+- **Verify:** after review approval, glama.ai/mcp/servers search for "agent signals".
+- Status: in progress 2026-06-12 — connector form filled, awaiting test-token paste +
+  submit-for-review
 
 ## 4. mcp.so
 - **How:** "Submit" form (name, GitHub URL, description). No account barrier last checked.

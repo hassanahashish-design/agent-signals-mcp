@@ -170,6 +170,7 @@ listings = listings.includes('## Sync log')
   : listings + `\n## Sync log\n${entry}\n`;
 writeFileSync(listingsPath, listings);
 log(`Files updated: server.json (v${serverJson.version}), README.md (+${rows.length} rows), LISTINGS.md.`);
+log('MANUAL FOLLOW-UP: snapshot-URL listings (Glama connector; mcp.so if live) need their Server URL updated to the new actors= list — see LISTINGS.md channel notes.');
 setOutput('changed', 'true');
 setOutput('summary_line', `+${additions.join(',') || '-'} -${removed.join(',') || '-'}`);
 
