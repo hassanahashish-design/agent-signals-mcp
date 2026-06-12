@@ -77,9 +77,24 @@ index from GitHub; all of them link to it as the canonical home.
   approval.
 
 ## 4. mcp.so
-- **How:** "Submit" form (name, GitHub URL, description). No account barrier last checked.
-- **Verify:** search after a day.
-- Status: draft
+- **How (actual flow, walked 2026-06-12):** mcp.so/submit form (Type=MCP Server, Name,
+  URL=GitHub repo, Server Config JSON). Submitting routes through sign-in (Hassan's
+  Google account). LESSONS:
+  - The submitted NAME becomes a LOCKED slug (disabled field) — submit a SHORT name
+    ("agent-signals"), not the full marketing title. Ours locked to the long slug;
+    kept because it is keyword-dense, but not pretty.
+  - The submit form's Server Config does NOT persist — re-add it afterwards via
+    My Servers → Edit (our record: mcp.so/my-servers/a6a952e4-c86a-4e16-97de-509c8cd747be/edit).
+    Same for Description/Tags/Content (rich body) — all filled in the edit view.
+  - "My Servers" list renders "No servers" even though the record exists — use the
+    direct edit URL above.
+  - Owner can only set status created/deleted; PUBLICATION is mcp.so's review.
+  - Their CDN 403s anonymous fetches — verify via a real browser, not curl/WebFetch.
+- **Sync model:** snapshot config JSON — covered by the sync Action's MANUAL FOLLOW-UP
+  flag ("mcp.so if live").
+- **Verify:** search "agent signals" on mcp.so after ~a day; record the public URL here.
+- Status: SUBMITTED 2026-06-12 (status "created", full copy + config + content saved,
+  "update project success" confirmed) — pending mcp.so review.
 
 ## 5. PulseMCP (pulsemcp.com)
 - **How:** ingests the official registry (step 1 covers it); manual submission form exists
