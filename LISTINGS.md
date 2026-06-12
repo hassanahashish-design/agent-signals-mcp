@@ -101,10 +101,15 @@ down on any niche showing traction. Therefore:
   write (every run = daily endpoint health check; red run = endpoint broke), updates
   server.json/README/this-file, commits, and publishes a Smithery release via
   `PUT api.smithery.ai/servers/.../releases` preserving the existing configSchema.
-  Secrets (GitHub repo → Settings → Secrets → Actions): `APIFY_TOKEN` (required),
-  `SMITHERY_API_KEY` (else run flags "manual-needed"). Test locally:
-  `APIFY_TOKEN=... node scripts/sync-actors.mjs --dry-run`. Lesson: Apify API throws
-  transient 502s — the script retries 5xx up to 4×.
+  Secrets (GitHub repo → Settings → Secrets → Actions): **`APIFY_TOKEN2`** = Apify token,
+  **`SMITHERY`** = Smithery API key (non-obvious names are deliberate-by-accident: a
+  mis-paste put a Smithery key into the secret named `APIFY_TOKEN`, which is now stale/
+  unused — the workflow maps env vars from APIFY_TOKEN2/SMITHERY instead. Lesson: when a
+  human pastes secrets into pre-named forms, verify name↔value pairing by RUNNING the
+  consumer, never by assuming). VERIFIED GREEN 2026-06-12: run #2 — 5/13 published
+  detected, tools/list 9 tools all present, no-change exit. Test locally:
+  `APIFY_TOKEN=... node scripts/sync-actors.mjs --dry-run`. Lessons: Apify API throws
+  transient 502s — script retries 5xx up to 4×; GitHub cron can lag up to ~15-30 min.
 
 ## Honesty rules (carried from PLAYBOOK Stage 6)
 - Never claim user counts/ratings we don't have.
