@@ -1,7 +1,7 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.hassanahashish-design/agent-signals-mcp",
-  "description": "Hiring signals, SEC EDGAR filings, research papers, GitHub repos & Hacker News as flat citation-ready JSON for AI agents. Pay-per-result via Apify; empty lookups cost $0.",
+  "description": "Hiring, SEC, research papers, GitHub & Hacker News as JSON for AI agents. Pay-per-result on Apify.",
   "repository": {
     "url": "https://github.com/hassanahashish-design/agent-signals-mcp",
     "source": "github"
@@ -15,8 +15,8 @@
         {
           "name": "Authorization",
           "description": "Apify API token as 'Bearer <token>' — get one free at console.apify.com/account/integrations; usage billed pay-per-result to your Apify account",
-          "is_required": true,
-          "is_secret": true
+          "isRequired": true,
+          "isSecret": true
         }
       ]
     }
