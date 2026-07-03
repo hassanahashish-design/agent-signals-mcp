@@ -10,7 +10,7 @@ Built on [Apify](https://apify.com/oblanceolate_mandola)'s hosted MCP server: no
 {
   "mcpServers": {
     "agent-signals": {
-      "url": "https://mcp.apify.com/?actors=oblanceolate_mandola/company-hiring-signals,oblanceolate_mandola/sec-edgar-filings,oblanceolate_mandola/research-paper-search,oblanceolate_mandola/github-repo-search,oblanceolate_mandola/hacker-news-monitor",
+      "url": "https://mcp.apify.com/?actors=oblanceolate_mandola%2Fcompany-hiring-signals%2Coblanceolate_mandola%2Fsec-edgar-filings%2Coblanceolate_mandola%2Fresearch-paper-search%2Coblanceolate_mandola%2Fgithub-repo-search%2Coblanceolate_mandola%2Fhacker-news-monitor%2Coblanceolate_mandola%2Ffederal-register-monitor%2Coblanceolate_mandola%2Fclinical-trials-search%2Coblanceolate_mandola%2Fstackoverflow-search%2Coblanceolate_mandola%2Fgdelt-news-monitor",
       "headers": { "Authorization": "Bearer <YOUR_APIFY_TOKEN>" }
     }
   }
@@ -28,6 +28,10 @@ Get a free Apify token at [console.apify.com/account/integrations](https://conso
 | [Research Paper Search](https://apify.com/oblanceolate_mandola/research-paper-search) | "Recent papers on LLM evaluation with DOIs" — OpenAlex, citations + venue + year | $3 / 1,000 |
 | [GitHub Repo Search](https://apify.com/oblanceolate_mandola/github-repo-search) | "Most-starred agent frameworks updated this week" — stars, forks, issues, last push | $3 / 1,000 |
 | [Hacker News Monitor](https://apify.com/oblanceolate_mandola/hacker-news-monitor) | "What is HN saying about our brand?" — points, comments, dates for signal-weighting | $2 / 1,000 |
+| [Federal Register Monitor — US Regulations to JSON](https://apify.com/oblanceolate_mandola/federal-register-monitor) | Search US Federal Register documents by keyword | $4 / 1,000 |
+| [Clinical Trials Search — ClinicalTrials.gov to JSON](https://apify.com/oblanceolate_mandola/clinical-trials-search) | Search ClinicalTrials.gov by condition, drug or sponsor | $4 / 1,000 |
+| [Stack Overflow Search — Questions to JSON](https://apify.com/oblanceolate_mandola/stackoverflow-search) | Search Stack Overflow questions by keyword | $2 / 1,000 |
+| [GDELT News Monitor — Global News Mentions to JSON](https://apify.com/oblanceolate_mandola/gdelt-news-monitor) | Search worldwide news by keyword via GDELT | $2 / 1,000 |
 
 Every result carries `sourceUrl` + `scrapedAt`, so downstream agents can cite and re-verify. Batched queries are deduplicated and never double-charged. Spend is capped per call with `maxResults`.
 

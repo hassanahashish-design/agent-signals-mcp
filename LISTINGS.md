@@ -177,3 +177,6 @@ down on any niche showing traction. Therefore:
 - Never claim user counts/ratings we don't have.
 - Every capability claim must be field-verified against the actor's spec.json.
 - "You only pay for successful results" must remain literally true on every channel.
+
+## Sync log
+- 2026-07-03: +[federal-register-monitor, clinical-trials-search, stackoverflow-search, gdelt-news-monitor] -[] | REVIEW: wikipedia-search | tools/list verified (13 tools) | v1.0.1
