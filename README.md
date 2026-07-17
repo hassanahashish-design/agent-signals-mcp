@@ -10,7 +10,7 @@ Built on [Apify](https://apify.com/oblanceolate_mandola)'s hosted MCP server: no
 {
   "mcpServers": {
     "agent-signals": {
-      "url": "https://mcp.apify.com/?actors=oblanceolate_mandola%2Fcompany-hiring-signals%2Coblanceolate_mandola%2Fsec-edgar-filings%2Coblanceolate_mandola%2Fresearch-paper-search%2Coblanceolate_mandola%2Fgithub-repo-search%2Coblanceolate_mandola%2Fhacker-news-monitor%2Coblanceolate_mandola%2Ffederal-register-monitor%2Coblanceolate_mandola%2Fclinical-trials-search%2Coblanceolate_mandola%2Fstackoverflow-search%2Coblanceolate_mandola%2Fgdelt-news-monitor",
+      "url": "https://mcp.apify.com/?actors=oblanceolate_mandola%2Fcompany-hiring-signals%2Coblanceolate_mandola%2Fsec-edgar-filings%2Coblanceolate_mandola%2Fresearch-paper-search%2Coblanceolate_mandola%2Fgithub-repo-search%2Coblanceolate_mandola%2Fhacker-news-monitor%2Coblanceolate_mandola%2Ffederal-register-monitor%2Coblanceolate_mandola%2Fclinical-trials-search%2Coblanceolate_mandola%2Fstackoverflow-search%2Coblanceolate_mandola%2Fgdelt-news-monitor%2Coblanceolate_mandola%2Fcourt-opinions-search",
       "headers": { "Authorization": "Bearer <YOUR_APIFY_TOKEN>" }
     }
   }
@@ -32,6 +32,7 @@ Get a free Apify token at [console.apify.com/account/integrations](https://conso
 | [Clinical Trials Search — ClinicalTrials.gov to JSON](https://apify.com/oblanceolate_mandola/clinical-trials-search) | Search ClinicalTrials.gov by condition, drug or sponsor | $4 / 1,000 |
 | [Stack Overflow Search — Questions to JSON](https://apify.com/oblanceolate_mandola/stackoverflow-search) | Search Stack Overflow questions by keyword | $2 / 1,000 |
 | [GDELT News Monitor — Global News Mentions to JSON](https://apify.com/oblanceolate_mandola/gdelt-news-monitor) | Search worldwide news by keyword via GDELT | $2 / 1,000 |
+| [Court Opinions Search — US Case Law to JSON](https://apify.com/oblanceolate_mandola/court-opinions-search) | Court opinions scraper & API: search US case law by keyword for case name, court, date and citation count as JSON | $4 / 1,000 |
 
 Every result carries `sourceUrl` + `scrapedAt`, so downstream agents can cite and re-verify. Batched queries are deduplicated and never double-charged. Spend is capped per call with `maxResults`.
 

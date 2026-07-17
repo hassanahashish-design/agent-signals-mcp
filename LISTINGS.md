@@ -196,6 +196,7 @@ down on any niche showing traction. Therefore:
 - "You only pay for successful results" must remain literally true on every channel.
 
 ## Sync log
+- 2026-07-17: +[court-opinions-search] -[] | REVIEW: wikipedia-search, podcast-search | tools/list verified (14 tools) | v1.0.2
 - 2026-07-03: +[federal-register-monitor, clinical-trials-search, stackoverflow-search, gdelt-news-monitor] -[] | REVIEW: wikipedia-search | tools/list verified (13 tools) | v1.0.1
 - 2026-07-17: no actor change (live store 10 = 9 in-kit + wikipedia-search off-theme, still excluded). Re-verified tools/list against the live mcp.apify.com URL = 13 (all 9 actors present). Fixed stale README intro ("five"→"nine data tools") the cloud sync script leaves untouched. wikipedia-search remains the ONLY off-theme published actor — a single tool, not a cluster; not enough to justify a second themed MCP listing yet. Keep flagging until 3+ off-theme actors accumulate (e.g. a general knowledge/reference cluster).
   **DRIFT FOUND — downstream channels never got the 2026-07-03 +4:** official MCP registry still v1.0.0/5-actors (OIDC republish failed), Smithery listing still 5-actors (release didn't propagate + no local API key). Both need repo-owner/Hassan action — see §1 and §2 status blocks. GitHub repo + live endpoint are correct at 9; the STORE and the source of truth are in sync, only the two external directories lag.
