@@ -39,7 +39,16 @@ index from GitHub; all of them link to it as the canonical home.
   `mcp-publisher login github-oidc` (no secret — repo owner authorizes the namespace).
   The script's version-bump-on-change avoids duplicate-version rejection. (OIDC path
   unverified until the first toolkit-change run exercises it; step is non-fatal.)
-- Status: **LIVE / verified-in-search 2026-06-12.**
+- Status: **LIVE 2026-06-12, but STALE as of 2026-07-17 — DRIFT.** Registry still shows
+  v1.0.0 with only the original 5 actors; the OIDC auto-republish never landed the
+  2026-07-03 v1.0.1 (+4 actors) change. Confirmed live:
+  `curl ".../v0/servers?search=agent-signals"` → version 1.0.0, 5 actors, publishedAt
+  2026-06-12 (unchanged). **The "unverified OIDC path" warning above came true — it is
+  NOT working.** ⚠️ HASSAN/CLOUD: republish is a repo-owner action — either run
+  `./mcp-publisher login github` (device code) + `./mcp-publisher publish` locally, or fix
+  the Action's `mcp-publisher login github-oidc` step (check the workflow's OIDC
+  permissions + that it runs on toolkit change). Cannot be done from this non-interactive
+  sync session.
 
 ## 2. Smithery (smithery.ai)
 - **How (actual flow, walked 2026-06-12):** smithery.ai/new → namespace `hassan-a-hashish` +
@@ -69,6 +78,14 @@ index from GitHub; all of them link to it as the canonical home.
   submissions until after that sync, then do all of wave 1 against the same toolkit.
   NOTE: the actor tools carry a DESTRUCTIVE badge from Apify's tool annotations — Apify-side,
   cosmetic, not controllable from Smithery.
+- **STALE as of 2026-07-17 — DRIFT.** `registry.smithery.ai/servers/hassan-a-hashish/agent-signals`
+  still references only the original 5 actors in its config URL; its cached tools list shows
+  5 actors + 4 Apify helpers = 9 tools, MISSING the 4 added 2026-07-03 (stackoverflow,
+  clinical-trials, federal-register, gdelt). The cloud Action's Smithery-release step did not
+  propagate. ⚠️ MANUAL UPDATE NEEDED — **no Smithery API key on disk** (`~/.config/smithery/api_key`
+  absent) so this sync session could not PUT a new release. HASSAN: drop the Smithery API key at
+  that path (chmod 600) so the automated release can run, or update the listing URL by hand in
+  the Smithery dashboard to the 9-actor mcp.apify.com URL from server.json.
 
 ## 3. Glama (glama.ai/mcp/servers)
 - **How (actual flow, walked 2026-06-12):** requires a Glama account (Hassan signed in
@@ -180,4 +197,5 @@ down on any niche showing traction. Therefore:
 
 ## Sync log
 - 2026-07-03: +[federal-register-monitor, clinical-trials-search, stackoverflow-search, gdelt-news-monitor] -[] | REVIEW: wikipedia-search | tools/list verified (13 tools) | v1.0.1
-- 2026-07-17: no actor change (live store 10 = 9 in-kit + wikipedia-search off-theme, still excluded). Re-verified tools/list = 13 (all 9 actors present). Fixed stale README intro ("five"→"nine data tools") the cloud sync script leaves untouched. wikipedia-search remains the ONLY off-theme published actor — a single tool, not a cluster; not enough to justify a second themed MCP listing yet. Keep flagging until 3+ off-theme actors accumulate (e.g. a general knowledge/reference cluster).
+- 2026-07-17: no actor change (live store 10 = 9 in-kit + wikipedia-search off-theme, still excluded). Re-verified tools/list against the live mcp.apify.com URL = 13 (all 9 actors present). Fixed stale README intro ("five"→"nine data tools") the cloud sync script leaves untouched. wikipedia-search remains the ONLY off-theme published actor — a single tool, not a cluster; not enough to justify a second themed MCP listing yet. Keep flagging until 3+ off-theme actors accumulate (e.g. a general knowledge/reference cluster).
+  **DRIFT FOUND — downstream channels never got the 2026-07-03 +4:** official MCP registry still v1.0.0/5-actors (OIDC republish failed), Smithery listing still 5-actors (release didn't propagate + no local API key). Both need repo-owner/Hassan action — see §1 and §2 status blocks. GitHub repo + live endpoint are correct at 9; the STORE and the source of truth are in sync, only the two external directories lag.
