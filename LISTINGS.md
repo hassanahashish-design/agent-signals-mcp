@@ -180,3 +180,4 @@ down on any niche showing traction. Therefore:
 
 ## Sync log
 - 2026-07-03: +[federal-register-monitor, clinical-trials-search, stackoverflow-search, gdelt-news-monitor] -[] | REVIEW: wikipedia-search | tools/list verified (13 tools) | v1.0.1
+- 2026-07-17: no actor change (live store 10 = 9 in-kit + wikipedia-search off-theme, still excluded). Re-verified tools/list = 13 (all 9 actors present). Fixed stale README intro ("five"→"nine data tools") the cloud sync script leaves untouched. wikipedia-search remains the ONLY off-theme published actor — a single tool, not a cluster; not enough to justify a second themed MCP listing yet. Keep flagging until 3+ off-theme actors accumulate (e.g. a general knowledge/reference cluster).

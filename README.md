@@ -1,6 +1,6 @@
 # Agent Signals MCP — Hiring, SEC Filings, Research Papers, GitHub & News Data for AI Agents
 
-One MCP server that gives your AI agent five live data tools — company hiring signals (Greenhouse/Lever/Ashby), SEC EDGAR full-text filings, academic papers (OpenAlex), GitHub repositories, and Hacker News mentions — all returned as flat, citation-ready JSON.
+One MCP server that gives your AI agent nine live data tools — company hiring signals (Greenhouse/Lever/Ashby), SEC EDGAR full-text filings, academic papers (OpenAlex), GitHub repositories, Hacker News mentions, Stack Overflow questions, ClinicalTrials.gov trials, US Federal Register documents, and global GDELT news — all returned as flat, citation-ready JSON.
 
 Built on [Apify](https://apify.com/oblanceolate_mandola)'s hosted MCP server: no installation, no hosting, pay-per-result billing through your own Apify account. **You only pay for successful results** — empty lookups cost $0.
 
